@@ -1,0 +1,21 @@
+[submodule "edk2-non-osi"]
+	path = edk2-non-osi
+	url = https://github.com/tianocore/edk2-non-osi.git
+[submodule "edk2"]
+	path = edk2
+	url = https://github.com/Josua-SR/edk2.git
+[submodule "edk2-platforms"]
+	path = edk2-platforms
+	url = https://github.com/Josua-SR/edk2-platforms.git
+[submodule "globalscale/atf-marvell"]
+	path = globalscale/atf-marvell
+	url = https://github.com/globalscaletechnologies/atf-marvell.git
+	branch = atf-v1.5-armada-18.12-gti
+[submodule "globalscale/binaries-marvell.git"]
+	path = globalscale/binaries-marvell.git
+	url = https://github.com/globalscaletechnologies/binaries-marvell.git
+	branch = binaries-marvell-armada-18.12
+[submodule "globalscale/mv-ddr-marvell"]
+	path = globalscale/mv-ddr-marvell
+	url = https://github.com/globalscaletechnologies/mv-ddr-marvell.git
+	branch = mv_ddr-armada-18.12-gti
