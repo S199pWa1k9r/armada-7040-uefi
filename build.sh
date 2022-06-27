@@ -7,9 +7,6 @@ cd "$(dirname $0)"
 BUILDTYPE=${1}
 shift
 
-vendor=Marvell
-board=Armada70x0McBin
-
 export WORKSPACE="$PWD"
 export PACKAGES_PATH=$PWD/edk2:$PWD/edk2-platforms:$PWD/globalscale/edk2-platforms:$PWD/edk2-non-osi
 export GCC5_AARCH64_PREFIX=aarch64-linux-gnu-
@@ -31,6 +28,5 @@ build_uefi() {
 . edk2/edksetup.sh
 
 build_uefitools
-#build_uefi Marvell Armada70x0McBin
 build_uefi Globalscale Armada70x0McBin
 
