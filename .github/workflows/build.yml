@@ -9,7 +9,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install toolchain
       run: |
-        sudo apt install device-tree-compiler
+        sudo apt install gcc-aarch64-linux-gnu iasl device-tree-compiler python3-pyelftools
         make sdk
     - name: Build
       run: |
