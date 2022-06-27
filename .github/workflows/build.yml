@@ -1,0 +1,17 @@
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install toolchain
+      run: |
+        sudo apt install device-tree-compiler
+        make sdk
+    - name: Build
+      run: |
+        make get-repos
+        make release
