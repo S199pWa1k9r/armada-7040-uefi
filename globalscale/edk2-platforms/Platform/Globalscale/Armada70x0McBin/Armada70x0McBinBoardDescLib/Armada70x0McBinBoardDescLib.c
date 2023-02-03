@@ -16,16 +16,6 @@
 #include <Library/MvGpioLib.h>
 #include <Library/UefiBootServicesTableLib.h>
 
-//
-// GPIO Expander
-//
-STATIC MV_GPIO_EXPANDER mGpioExpander = {
-  PCA9554_ID,
-  0x39,
-  0x0,
-};
-
-
 EFI_STATUS
 EFIAPI
 ArmadaBoardGpioExpanderGet (
@@ -33,8 +23,8 @@ ArmadaBoardGpioExpanderGet (
   IN OUT UINTN             *GpioExpanderCount
   )
 {
-  *GpioExpanderCount = 1;
-  *GpioExpanders = &mGpioExpander;
+  *GpioExpanderCount = 0;
+  *GpioExpanders = NULL;
 
   return EFI_SUCCESS;
 }
@@ -42,29 +32,19 @@ ArmadaBoardGpioExpanderGet (
 //
 // PCIE
 //
-//&cp0_pcie2 {
-//        status = "okay";
-//        reset-gpio = <&cp0_gpio1 9 GPIO_ACTIVE_LOW>;
-//};
-//
 STATIC
 MV_PCIE_CONTROLLER mPcieController[] = {
   { /* PCIE2 @0xF2640000 */
     .PcieDbiAddress        = 0xF2640000,
     .ConfigSpaceAddress    = 0xE0000000,
-#if 1
-    .HaveResetGpio         = FALSE,
-    .PcieResetGpio         = { 0 },
-#else
     .HaveResetGpio         = TRUE,
     .PcieResetGpio         =
      {
        MV_GPIO_DRIVER_TYPE_SOC_CONTROLLER,
-       MV_GPIO_CP0_CONTROLLER1,
+       MV_GPIO_CP0_CONTROLLER0,
        9,
-       FALSE
+       TRUE
      },
-#endif
     .PcieBusMin            = 0,
     .PcieBusMax            = 0xFE,
     .PcieIoTranslation     = 0xEFF00000,
