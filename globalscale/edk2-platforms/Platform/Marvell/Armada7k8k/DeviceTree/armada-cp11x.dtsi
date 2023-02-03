@@ -214,6 +214,7 @@
                         reg-names = "rtc", "rtc-soc";
                         interrupts = <77 IRQ_TYPE_LEVEL_HIGH>;
                         status = "disabled";
+			//status = "okay";
                 };
 
                 CP11X_LABEL(syscon0): system-controller@440000 {

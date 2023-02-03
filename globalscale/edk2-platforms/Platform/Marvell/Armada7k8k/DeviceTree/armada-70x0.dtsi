@@ -35,12 +35,15 @@
 #undef CP11X_PCIE1_BASE
 #undef CP11X_PCIE2_BASE
 
+#define GPIO_ACTIVE_HIGH 0
+#define GPIO_ACTIVE_LOW  1
+
 &cp0_gpio1 {
-        status = "okay";
+	status = "okay";
 };
 
 &cp0_gpio2 {
-        status = "okay";
+	status = "okay";
 };
 
 &cp0_syscon0 {
