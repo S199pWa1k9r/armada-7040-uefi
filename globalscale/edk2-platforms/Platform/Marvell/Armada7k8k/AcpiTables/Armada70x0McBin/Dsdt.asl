@@ -118,38 +118,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "MVEBU ", "ARMADA7K", 3)
                 }
             })
         }
-#if 1
-        Device (MMC1)
-        {
-            Name (_HID, "MRVL0004")     // _HID: Hardware ID
-            Name (_UID, 0x01)           // _UID: Unique ID
-            Name (_CCA, 0x01)           // _CCA: Cache Coherency Attribute
-            Method (_STA)               // _STA: Device status
-            {
-                Return (0xF)
-            }
 
-            Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
-            {
-                Memory32Fixed (ReadWrite,
-                    0xF2780000,         // Address Base (MMIO)
-                    0x00000300,         // Address Length
-                    )
-                Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive, ,, )
-                {
-                  CP_GIC_SPI_CP0_SDMMC
-                }
-            })
-            Name (_DSD, Package () {
-                ToUUID("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
-                Package () {
-                      Package () { "clock-frequency", 400000000 },
-                      Package () { "bus-width", 4 },
-                      Package () { "non-removable", 0x1  },
-                }
-            })
-        }
-#endif
         Device (XHC0)
         {
             Name (_HID, "PNP0D10")      // _HID: Hardware ID
@@ -338,7 +307,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "MVEBU ", "ARMADA7K", 3)
                   Package () {
                     Package () { "port-id", 1 },
                     Package () { "gop-port-id", 2 },
-                    Package () { "phy-mode", "sgmii"},
+                    Package () { "phy-mode", "sgmii"},		// 2500base-x
                     Package () { "phy-handle", \_SB.SMI0.PHY0},
                   }
               })

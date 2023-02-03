@@ -18,7 +18,6 @@
   VERSION_STRING                 = 1.0
 
 [Sources]
-  #Armada80x0McBin/Dbg2.aslc
   Armada70x0McBin/Dsdt.asl
   Armada70x0McBin/Mcfg.aslc
   Fadt.aslc
