@@ -48,15 +48,19 @@
 #
 ################################################################################
 [PcdsFixedAtBuild.common]
-  #Platform description
+  # Platform description
+  # SMBIOS/DMI
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString|L"EDK2 SW 1.0"
   gMarvellTokenSpaceGuid.PcdProductManufacturer|"GlobalScale"
   gMarvellTokenSpaceGuid.PcdProductPlatformName|"Armada 7040 MochaBin" 
   gMarvellTokenSpaceGuid.PcdProductVersion|"Rev. 1.1"
+  gMarvellTokenSpaceGuid.PcdProductSerial|"Serial Not Set"
+  gMarvellTokenSpaceGuid.PcdFirmwareVersion|"EDK2 SW 1.1"
 
-  #CP110 count
+  # CP110 count
   gMarvellTokenSpaceGuid.PcdMaxCpCount|1
 
-  #MPP
+  # MPP
   gMarvellTokenSpaceGuid.PcdMppChipCount|2
 
   # APN806-A0 MPP SET
@@ -81,60 +85,59 @@
   # I2C
   gMarvellTokenSpaceGuid.PcdI2cSlaveAddresses|{ 0x50, 0x57, 0x60, 0x21 }
   gMarvellTokenSpaceGuid.PcdI2cSlaveBuses|{ 0x0, 0x0, 0x0, 0x0 }
-  gMarvellTokenSpaceGuid.PcdI2cControllersEnabled|{ 0x0, 0x1, 0x1 }
+  gMarvellTokenSpaceGuid.PcdI2cControllersEnabled|{ 0x1, 0x1, 0x0 }
   gMarvellTokenSpaceGuid.PcdEepromI2cAddresses|{ 0x50, 0x57 }
   gMarvellTokenSpaceGuid.PcdEepromI2cBuses|{ 0x1, 0x1 }
   gMarvellTokenSpaceGuid.PcdI2cClockFrequency|250000000
   gMarvellTokenSpaceGuid.PcdI2cBaudRate|100000
   gMarvellTokenSpaceGuid.PcdI2cBusCount|2
 
-  #SPI
+  # SPI
   gMarvellTokenSpaceGuid.PcdSpiRegBase|0xF2700680
   gMarvellTokenSpaceGuid.PcdSpiMaxFrequency|10000000
   gMarvellTokenSpaceGuid.PcdSpiClockFrequency|200000000
-
   gMarvellTokenSpaceGuid.PcdSpiFlashMode|3
   gMarvellTokenSpaceGuid.PcdSpiFlashCs|0
 
-  #ComPhy
+  # ComPhy
+  # 0: SGMII1       3.125 Gbps
+  # 1: USB3_HOST0   5 Gbps
+  # 2: SATA0        5 Gbps
+  # 3: SATA1        5 Gbps
+  # 4: SFI          10.3125 Gbps
+  # 5: PCIE2        5 Gbps
   gMarvellTokenSpaceGuid.PcdComPhyDevices|{ 0x1 }
-  # ComPhy0
-  #Comphy-0: SGMII1       3.125 Gbps
-  #Comphy-1: USB3_HOST0   5 Gbps
-  #Comphy-2: SATA0        5 Gbps
-  #Comphy-3: SATA1        5 Gbps
-  #Comphy-4: SFI0         10.3125 Gbps
-  #Comphy-5: PCIE2         
   gMarvellTokenSpaceGuid.PcdChip0ComPhyTypes|{ $(CP_SGMII1), $(CP_USB3_HOST0), $(CP_SATA0), $(CP_SATA1), $(CP_SFI), $(CP_PCIE2) }
-  gMarvellTokenSpaceGuid.PcdChip0ComPhySpeeds|{ $(CP_1_25G), $(CP_5G), $(CP_5G), $(CP_5G), $(CP_10_3125G), $(CP_5G) }
+  gMarvellTokenSpaceGuid.PcdChip0ComPhySpeeds|{ $(CP_3_125G), $(CP_5G), $(CP_5G), $(CP_5G), $(CP_10_3125G), $(CP_5G) }
 
-  #UtmiPhy
+  # UtmiPhy
   gMarvellTokenSpaceGuid.PcdUtmiControllersEnabled|{ 0x1, 0x1 }
   gMarvellTokenSpaceGuid.PcdUtmiPortType|{ $(UTMI_USB_HOST0), $(UTMI_USB_HOST1) }
 
-  #MDIO
+  # MDIO
   gMarvellTokenSpaceGuid.PcdMdioControllersEnabled|{ 0x1, 0x0 }
 
-  #PHY
+  # PHY
   gMarvellTokenSpaceGuid.PcdPhy2MdioController|{ 0x0, 0x0 }
   gMarvellTokenSpaceGuid.PcdPhyDeviceIds|{ 0x0, 0x0 }
   gMarvellTokenSpaceGuid.PcdPhySmiAddresses|{ 0x0, 0x1 }
   gMarvellTokenSpaceGuid.PcdPhyStartupAutoneg|FALSE
 
-  #NET
+  # NET
   gMarvellTokenSpaceGuid.PcdPp2GopIndexes|{ 0x0, 0x2, 0x3 }
-  gMarvellTokenSpaceGuid.PcdPp2InterfaceAlwaysUp|{ 0x0, 0x0, 0x0 }
-  gMarvellTokenSpaceGuid.PcdPp2InterfaceSpeed|{ $(PHY_SPEED_10000), $(PHY_SPEED_1000), $(PHY_SPEED_1000) }
+  gMarvellTokenSpaceGuid.PcdPp2InterfaceAlwaysUp|{ 0x1, 0x1, 0x1 }
+  gMarvellTokenSpaceGuid.PcdPp2InterfaceSpeed|{ $(PHY_SPEED_10000), $(PHY_SPEED_2500), $(PHY_SPEED_1000) }
   gMarvellTokenSpaceGuid.PcdPp2PhyConnectionTypes|{ $(PHY_SFI), $(PHY_SGMII), $(PHY_RGMII) }
   gMarvellTokenSpaceGuid.PcdPp2PhyIndexes|{ 0xFF, 0x0, 0x1 }
   gMarvellTokenSpaceGuid.PcdPp2Port2Controller|{ 0x0, 0x0, 0x0 }
   gMarvellTokenSpaceGuid.PcdPp2PortIds|{ 0x0, 0x1, 0x2 }
   gMarvellTokenSpaceGuid.PcdPp2Controllers|{ 0x1 }
 
-  #PciEmulation
+  # NonDiscoverableDevices
   gMarvellTokenSpaceGuid.PcdPciEXhci|{ 0x1, 0x1 }
   gMarvellTokenSpaceGuid.PcdPciEAhci|{ 0x1 }
-  gMarvellTokenSpaceGuid.PcdPciESdhci|{ 0x1, 0x1 }
+  gMarvellTokenSpaceGuid.PcdPciESdhci|{ 0x1 }
 
-  #RTC
+  # RTC
   gMarvellTokenSpaceGuid.PcdRtcBaseAddress|0xF2284000
+

@@ -20,8 +20,8 @@
 // GPIO Expander
 //
 STATIC MV_GPIO_EXPANDER mGpioExpander = {
-  PCA9555_ID,
-  0x21,
+  PCA9554_ID,
+  0x39,
   0x0,
 };
 
@@ -42,28 +42,25 @@ ArmadaBoardGpioExpanderGet (
 //
 // PCIE
 //
+//&cp0_pcie2 {
+//        status = "okay";
+//        reset-gpio = <&cp0_gpio1 9 GPIO_ACTIVE_LOW>;
+//};
+//
 STATIC
 MV_PCIE_CONTROLLER mPcieController[] = {
   { /* PCIE2 @0xF2640000 */
     .PcieDbiAddress        = 0xF2640000,
     .ConfigSpaceAddress    = 0xE0000000,
-    /* serg */
 #if 1
     .HaveResetGpio         = FALSE,
     .PcieResetGpio         = { 0 },
-#endif
-/* mini-pcie#1 (J5)
-&cp0_pcie2 {
-        status = "okay";
-        marvell,reset-gpio = <&cp0_gpio0 9 GPIO_ACTIVE_HIGH>;
-};
-*/
-#if 0
+#else
     .HaveResetGpio         = TRUE,
     .PcieResetGpio         =
      {
        MV_GPIO_DRIVER_TYPE_SOC_CONTROLLER,
-       MV_GPIO_CP0_CONTROLLER0,
+       MV_GPIO_CP0_CONTROLLER1,
        9,
        FALSE
      },
@@ -119,17 +116,6 @@ MV_BOARD_SDMMC_DESC mSdMmcDescTemplate[] = {
     TRUE,  /* XenonSlowModeEnabled */
     0x40,  /* XenonTuningStepDivisor */
     EmbeddedSlot /* SlotType */
-#if 1 
-  },
-  { /* SD/MMC 0xF2780000 */
-    0,     /* SOC will be filled by MvBoardDescDxe */
-    0,     /* SdMmcDevCount will be filled by MvBoardDescDxe */
-    TRUE,  /* Xenon1v8Enabled */
-    FALSE, /* Xenon8BitBusEnabled */
-    FALSE, /* XenonSlowModeEnabled */
-    0x19,  /* XenonTuningStepDivisor */
-    EmbeddedSlot /* SlotType */
-#endif
   }
 };
 
