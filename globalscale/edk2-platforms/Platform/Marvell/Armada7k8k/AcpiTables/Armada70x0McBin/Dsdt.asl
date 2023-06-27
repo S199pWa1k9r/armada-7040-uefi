@@ -194,38 +194,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "MVEBU ", "ARMADA7K", 3)
                 }
             })
         }
-#if 0
-        Device (COM2)
-        {
-            Name (_HID, "MRVL0001")                             // _HID: Hardware ID
-            Name (_CID, "HISI0031")                             // _CID: Compatible ID
-            Name (_UID, 0x01)                                   // _UID: Unique ID
-            Method (_STA)                                       // _STA: Device status
-            {
-                Return (0xF)
-            }
-            Name (_ADR, ARMADA80X0_MCBIN_DBG2_UART_REG_BASE)    // _ADR: Address
-            Name (_CRS, ResourceTemplate ()                     // _CRS: Current Resource Settings
-            {
-                Memory32Fixed (ReadWrite,
-                    ARMADA80X0_MCBIN_DBG2_UART_REG_BASE,        // Address Base
-                    0x00000100,                                 // Address Length
-                    )
-                Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive, ,, )
-                {
-                  CP_GIC_SPI_CP0_UART1
-                }
-            })
-            Name (_DSD, Package () {
-                ToUUID("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
-                Package () {
-                      Package () { "clock-frequency", FixedPcdGet32 (PcdSerialClockRate) },
-                      Package () { "reg-io-width", 1 },
-                      Package () { "reg-shift", 2 },
-                }
-            })
-        }
-#endif
+
         Device (SMI0)
         {
             Name (_HID, "MRVL0100")                             // _HID: Hardware ID
@@ -241,10 +210,6 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "MVEBU ", "ARMADA7K", 3)
                     0x00000010,                                 // Address Length
                     )
             })
-            Device (PHY0)
-            {
-                Name (_ADR, 0x0)
-            }
             Device (PHY1)
             {
                 Name (_ADR, 0x1)
@@ -307,8 +272,18 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "MVEBU ", "ARMADA7K", 3)
                   Package () {
                     Package () { "port-id", 1 },
                     Package () { "gop-port-id", 2 },
-                    Package () { "phy-mode", "sgmii"},		// 2500base-x
-                    Package () { "phy-handle", \_SB.SMI0.PHY0},
+                    Package () { "phy-mode", "2500base-x"},
+                  },
+                  ToUUID("dbb8e3e6-5886-4ba6-8795-1319f52a966b"),
+                  Package () {
+                    Package () {"fixed-link", "LNK0"}
+                  }
+              })
+              Name (LNK0, Package() { // Data-only subnode of port
+                  ToUUID("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
+                  Package () {
+                    Package () {"speed", 2500},
+                    Package () {"full-duplex", 1}
                   }
               })
             }
